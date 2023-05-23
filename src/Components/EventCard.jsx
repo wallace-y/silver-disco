@@ -1,15 +1,27 @@
-function EventCard() {
+function EventCard(props) {
+  const event = props.event;
+  const name = event.name;
+  const imgUrl = event.images[2].url;
+  const linkUrl = event.url;
+  const startDate = event.dates.start.localDate;
+  let min;
+  let max;
+  if (event.priceRanges) {
+    min = event.priceRanges[0].min;
+    max = event.priceRanges[0].max;
+  }
+
   return (
     <div className="card" style={{ width: "18rem" }}>
-      <img src="" className="card-img-top" alt="sometext"></img>
+      <img src={imgUrl} className="card-img-top" alt="sometext"></img>
       <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+        <h5 className="card-title">{name}</h5>
+        <p>
+          Min: £{min || "Unknown"} Max: £{max || "Unknown"}
         </p>
-        <a href="#" className="btn btn-primary">
-          Go somewhere
+        <p className="card-text">{startDate}</p>
+        <a href={linkUrl} className="btn btn-primary">
+          Buy tickets
         </a>
       </div>
     </div>
